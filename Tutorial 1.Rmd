@@ -1,0 +1,66 @@
+---
+title: "Cologne Stats Tutorial 1"
+author: "Marguerite CAMERON"
+date: "21 novembre 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+pitch = c(233,204,242,130,112,142)
+sex = c(rep("female",3),rep("male",3))
+
+my.df = data.frame(sex,pitch)
+print(my.df)
+
+xmdl = lm(pitch ~ sex, my.df)
+summary(xmdl)
+
+mean(my.df[my.df$sex=="female",]$pitch)
+```
+```{r}
+age = c(14,23,35,48,52,67)
+voice_pitch = c(252,244,240,233,212,204)
+
+mynew.data = data.frame(age,voice_pitch)
+print(mynew.data)
+
+mndl = lm(voice_pitch ~age, mynew.data)
+summary(mndl)
+
+mndlr = plot(fitted(mndl),residuals(mndl))
+
+mynew.data$age.c = mynew.data$age - mean(mynew.data$age)
+mnndl = lm(voice_pitch ~age.c, mynew.data)
+summary(mnndl)
+
+
+
+```
+
+```{r}
+## example of filled-out residual plot, showing what a normal one should look like
+
+blob.plot = plot(rnorm(100),rnorm(100))
+```
+
+```{r}
+pitch = c(233,204,242,130,112,142)
+sex = c(rep("female",3),rep("male",3))
+
+my.df = data.frame(sex,pitch)
+
+xmdl = lm(pitch ~ sex, my.df)
+
+xmdl_dfbeta = dfbeta(xmdl)
+summary(xmdl_dfbeta)
+
+
+
+```
+
+
+
